@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.Mechanisms.AdjustableHood;
 import org.firstinspires.ftc.teamcode.Mechanisms.Drivetrain;
 import org.firstinspires.ftc.teamcode.Mechanisms.IntakeTransfer;
 import org.firstinspires.ftc.teamcode.Mechanisms.Outtake;
+import org.firstinspires.ftc.teamcode.Mechanisms.Ramp;
 import org.firstinspires.ftc.teamcode.Mechanisms.TransferStopper;
 
 @TeleOp(name = "MainTeleOp")
@@ -15,6 +16,7 @@ public class MainTeleOp extends OpMode {
     TransferStopper transferStopper = new TransferStopper();
     Outtake outtake = new Outtake();
     Drivetrain drivetrain = new Drivetrain();
+    Ramp ramp = new Ramp();
     double forward, strafe, rotate;
 
     @Override
@@ -24,6 +26,7 @@ public class MainTeleOp extends OpMode {
         transferStopper.initTransferStopper(hardwareMap);
         outtake.initOuttake(hardwareMap);
         adjustableHood.initHood(hardwareMap);
+        ramp.initRamp(hardwareMap);
     }
 
     @Override
@@ -59,6 +62,10 @@ public class MainTeleOp extends OpMode {
         }
         else {
             transferStopper.setTransferPosition(0.36);
+        }
+
+        if (gamepad2.bWasPressed()) {
+            ramp.moveRamp();
         }
     }
 }
