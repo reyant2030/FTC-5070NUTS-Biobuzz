@@ -34,14 +34,14 @@ public class MainTeleOp extends OpMode {
         drivetrain.drive(forward, strafe, rotate);
 
         if (gamepad1.right_bumper) {
-            intakeTransfer.setIntakeTransferPower(1);
+            intakeTransfer.setIntakeTransferPower(-1);
         }
         else {
             intakeTransfer.setIntakeTransferPower(0);
         }
 
         if (gamepad2.right_bumper) {
-            intakeTransfer.setIntakeTransferPower(1);
+            intakeTransfer.setIntakeTransferPower(-1);
         }
         else {
             intakeTransfer.setIntakeTransferPower(0);
