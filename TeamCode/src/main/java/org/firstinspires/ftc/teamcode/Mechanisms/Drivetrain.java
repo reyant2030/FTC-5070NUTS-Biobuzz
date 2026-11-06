@@ -1,11 +1,15 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Drivetrain {
     private DcMotor frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
+    private IMU imu;
 
     public void initDrivetrain(HardwareMap hwMap) {
         frontLeftMotor = hwMap.get(DcMotor.class, "FL");
@@ -29,6 +33,13 @@ public class Drivetrain {
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        imu = hwMap.get(IMU.class, "imu");
+
+        RevHubOrientationOnRobot revOrientation = new RevHubOrientationOnRobot
+                (RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD, RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
+
+        imu.initialize(new IMU.Parameters(revOrientation));
     }
 
     public void drive(double forward, double strafe, double rotate) {
@@ -51,5 +62,17 @@ public class Drivetrain {
         backLeftMotor.setPower(maxSpeed * (backLeftPower / maxPower));
         frontRightMotor.setPower(maxSpeed * (frontRightPower / maxPower));
         backRightMotor.setPower(maxSpeed * (backRightPower / maxPower));
+    }
+
+    public void fieldCentric(double forward, double strafe, double rotate){
+        double theta = Math.atan2(forward, strafe);
+        double r = Math.hypot(strafe, forward);
+
+        theta = AngleUnit.normalizeRadians(theta - imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+
+        double newForward = r * Math.sin(theta);
+        double newStrafe = r * Math.cos(theta);
+
+        this.drive(newForward, newStrafe, rotate);
     }
 }

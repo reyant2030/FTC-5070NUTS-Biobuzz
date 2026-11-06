@@ -7,10 +7,10 @@ public class TransferStopper {
     Servo stopperServo;
 
     public void initTransferStopper(HardwareMap hwMap) {
-        stopperServo = hwMap.get(Servo.class, "Stopper");
+        stopperServo = hwMap.get(Servo.class, "TransferStopper");
     }
 
-    public void setTransferPosition(double position) {
+    public void setPosition(double position) {
         stopperServo.setPosition(position);
     }
 }
