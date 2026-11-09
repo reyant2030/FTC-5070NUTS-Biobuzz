@@ -41,9 +41,9 @@ public class MainTeleOp extends OpMode {
             intakeTransfer.setTransferPower(1);
         }
         else if (gamepad2.a) {
-            intakeTransfer.setTransferPower(0.4);
+            intakeTransfer.setTransferPower(0.3);
         }
-        else if (gamepad1.right_trigger > 0){
+        else if (gamepad1.right_trigger > 0) {
             intakeTransfer.setTransferPower(-1);
         }
         else {
