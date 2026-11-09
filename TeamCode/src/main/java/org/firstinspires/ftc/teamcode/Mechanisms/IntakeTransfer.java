@@ -4,15 +4,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class IntakeTransfer {
-    private DcMotor intakeTransferMotor;
+    private DcMotor intakeTransfer;
 
-    public void initIntakeTransfer(HardwareMap hwMap) {
-        intakeTransferMotor = hwMap.get(DcMotor.class, "IntakeTransfer");
-        intakeTransferMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        intakeTransferMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+    public void initTransfer(HardwareMap hwMap) {
+        intakeTransfer = hwMap.get(DcMotor.class, "IntakeTransfer");
+        intakeTransfer.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeTransfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    public void setIntakeTransferPower(double power) {
-        intakeTransferMotor.setPower(power);
+    public void setTransferPower(double power) {
+        intakeTransfer.setPower(power);
     }
 }

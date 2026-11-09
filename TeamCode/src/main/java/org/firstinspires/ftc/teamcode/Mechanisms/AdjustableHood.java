@@ -1,16 +1,16 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 public class AdjustableHood {
-    Servo stopperServo;
+    CRServo hoodServo;
 
-    public void initHood(HardwareMap hwMap) {
-        stopperServo = hwMap.get(Servo.class, "Stopper");
+    public void initHoodServo(HardwareMap hwMap) {
+        hoodServo = hwMap.get(CRServo.class, "HoodServo");
     }
 
-    public void setHoodPosition(double position) {
-        stopperServo.setPosition(position);
+    public void setPower(double power) {
+        hoodServo.setPower(power);
     }
 }
