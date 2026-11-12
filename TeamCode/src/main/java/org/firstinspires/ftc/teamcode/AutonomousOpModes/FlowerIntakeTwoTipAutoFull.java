@@ -69,6 +69,7 @@ public class FlowerIntakeTwoTipAutoFull extends LinearOpMode {
             .requiring(intakeTransfer);
 
     //public Command adjustableHood = Command.build()...
+    //TS means Transfer Stopper
     public Command TS = Command.build()
             .setStart(() -> transferStopper.setPosition(0.995))
             .requiring(transferStopper);
